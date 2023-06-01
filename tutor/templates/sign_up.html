@@ -1,0 +1,48 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UVa Study Buddy</title>
+    <link rel="stylesheet" type="text/css" href="../../static/tutor/style.css">
+    <!-- <style>
+      .signup_button{
+        color: black;
+      }
+      .signup_button:hover{
+        transform: scale(.75);
+      }
+    </style> -->
+  </head>
+</html>
+
+
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <div class="container d-flex justify-content-center align-items-center navbar-brand">
+    Welcome to our Tutoring service!
+  </div>
+</nav>
+
+
+
+
+<div class="container d-flex flex-column align-items-center justify-content-center my-5">
+    <p>Create an account:</p>
+    <a href="/signup1/" class="signup_button">I am a student</a>
+    <a href="/signup2/">I am a tutor</a>
+    <div
+      class="list-group">
+    </div>
+
+</div>
+
+<footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+        <span class="text-light">&copy; 2023 All Rights Reserved</span>
+    </div>
+</footer>

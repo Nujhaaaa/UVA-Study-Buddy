@@ -1,0 +1,194 @@
+{% load widget_tweaks %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Course</title>
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f8f9fa;
+
+				/* background-image: url("/static/background.jpg");
+				background-repeat: repeat-y;
+				background-size: 100%; */
+      		
+		}
+		
+
+
+		.navbar {
+			background-color: #003366;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			font-size: 18px;
+			font-weight: bold;
+			font-family: 'Poppins', sans-serif;
+			position: sticky;
+			top: 0;
+			z-index: 100;
+		}
+
+		.navbar-brand {
+			font-weight: bold;
+			font-size: 20px;
+			color: #f8f9fa;
+		}
+
+		.navbar-nav .nav-link {
+			color: #f8f9fa;
+			transition: color 0.2s ease-in-out;
+			font-weight: bold;
+   font-size: 16px;
+		}
+
+		.navbar-nav .nav-link:hover {
+			color: #e0e0e0;
+		}
+
+		.navbar-nav .active > .nav-link {
+			background-color: #f8f9fa;
+			color: #003366;
+			border-radius: 10px;
+		}
+
+		.container {
+			max-width: 960px;
+			margin: 0 auto;
+			padding: 1rem;
+		}
+
+		h1 {
+			font-size: 2.5rem;
+			color: #003366;
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+
+		.form-container {
+			background-color: #ffffff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 2rem;
+			border-radius: 10px;
+		}
+
+		.form-label {
+			color: #003366;
+			font-weight: bold;
+		}
+
+		.form-control {
+			border-radius: 10px;
+			font-size: 16px;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		.btn-primary {
+			background-color: #003366;
+			border-radius: 10px;
+			border: none;
+			color: #f8f9fa;
+			font-family: 'Poppins', sans-serif;
+			font-size: 16px;
+			margin-top: 1rem;
+		}
+
+		.btn-primary:hover {
+			background-color: #001f3f;
+			transition: background-color 0.2s ease-in-out;
+		}
+
+		.form-group {
+			margin-bottom: 1.5rem;
+		}
+
+		.form-text {
+			color: #6c757d;
+			font-size: 0.8rem;
+		}
+
+		.footer {
+			background-color: #003366;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-family: 'Poppins', sans-serif;
+			font-size: 14px;
+			color: #f8f9fa;
+			/* position: absolute;
+			bottom: 0; */
+			width: 100%;
+		}
+		/* .functionals{
+            margin: auto;
+            width: 800px;
+            height: auto;
+            border: 3px solid black;
+            padding-bottom: 35px;
+            padding-top: 35px;
+            background-color: white;
+            border-radius: 5%;
+            margin-top: 120px;
+            margin-bottom: 120px;
+        } */
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">UVa Study Buddy</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria 		controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'tutor_logged_in' id=request.user.id %}">Search</a>
+				 </li>
+				 <li class="nav-item">
+					<a class="nav-link" href="{% url 'tutor_sessions' id=request.user.id %}">Sessions</a>
+				 </li>
+				 <li class="nav-item">
+					<a class="nav-link" href="{% url 'tutor_courses' id=request.user.id %}">Courses</a>
+				 </li>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- <div class="functionals"> -->
+<div class="container">
+	<h1>Add Course</h1>
+	<div class="form-container">
+		<form method="post">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="{{ form.hourly_rate.auto_id }}" class="form-label"> Hourly Rate</label>
+				{{ form.hourly_rate|add_class:"form-control" }}
+			</div>
+			<div class="form-group">
+				<label for="{{ form.available_time_frames.auto_id }}" class="form-label">Available Time Frames</label>
+				{{ form.available_time_frames|add_class:"form-control" }}
+				<small class="form-text text-muted">Enter the time frames when you are available to tutor.</small>
+			</div>
+			<button type="submit" class="btn btn-primary">Add Course</button>
+		</form>
+	</div>
+</div>
+<!-- </div> -->
+<footer class="footer">
+	<div class="container">
+		<p>&copy; 2023 UVa Study Buddy. All Rights Reserved.</p>
+	</div>
+</footer>
+</body>
+</html>

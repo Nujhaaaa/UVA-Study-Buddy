@@ -1,0 +1,63 @@
+{% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {%bootstrap_messages %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>UVA Study Buddy</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../../static/tutor/style.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="/">UVa Study Buddy</a>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'tutor_logged_in' id=request.user.id %}">Search</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'tutor_sessions' id=request.user.id %}">Sessions</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'tutor_courses' id=request.user.id %}">Courses</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'tutor_inbox' %}">Messages</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/logout">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+      {% load crispy_forms_tags %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 p-5">
+          <h3>Your Conversations</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 p-5">
+          <form method="GET" action="{% url 'create-thread' %}">
+            <button class="btn btn-light p-3" type="submit">Start a Conversation</button>
+          </form>
+        </div>
+    </div>
+    {% for thread in threads.all %}
+    <div class="row mb-3">
+      <div class="card col-md-12 p-5 shadow-sm">
+        <h5>{{ thread.receiver }}</h5>
+        <a class="stretched-link" href="{% url 'thread' thread.pk %}"></a>
+        {% if thread.need_noti %}
+          <p>!!!</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>

@@ -1,0 +1,109 @@
+{% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% bootstrap_messages %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UVA Study Buddy</title>
+        <link rel="stylesheet" type="text/css" href="../../static/tutor/style.css" />
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">UVa Study Buddy</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'student_logged_in' id=request.user.id %}">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'student_sessions' id=request.user.id %}">Sessions</a>
+                        </li>
+                        <li class="nav-item">
+							              <a class="nav-link" href="{% url 'student_inbox' %}">Messages</a>
+						             </li>
+                                     <li class="nav-item">
+                                        <a class="nav-link" href="/logout">Logout</a>
+                                    </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-4 text-center">
+            <h1>Welcome, Student!</h1>
+            <p class="lead">Find the perfect tutor for your courses by searching below.</p>
+
+            <!-- Add the search bar -->
+            <form method="get" action="{% url 'student_logged_in' id=request.user.id %}" class="d-flex justify-content-center">
+                <input type="text" name="q" class="form-control" placeholder="Type course mnemonic, number, or name and hit 'Search'..." value="{{ request.GET.q }}" style="width: 50%;" />
+                <button type="submit" class="btn btn-primary ms-2" style="width: 150px; height: 38px;">Search</button>
+            </form>
+
+            {% if query and courses %}
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Name</th>
+                        <th>Tutors Available</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.subject }}{{ course.catalog_nbr }}</td>
+                        <td>{{ course.descr }}</td>
+                        <td>{{ course.tutor_count }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findTutorsModal{{ forloop.counter }}">
+                                Get Tutoring
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+
+            <!-- Find Tutors Modal -->
+            {% for course in courses %}
+            <div class="modal fade" id="findTutorsModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="findTutorsModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="findTutorsModalLabel">
+                                Tutors for {{ course.subject }}{{ course.catalog_nbr }}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% for tutor in course.tutors %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+									<h5 class="card-title">{{ tutor.email }}</h5>
+									<p class="card-text">Hourly Rate: ${{ tutor.hourly_rate }}</p>
+									<p class="card-text">Available Time Frames: {{ tutor.available_time_frames }}</p>
+									<!-- Replace the link with the new form -->
+									<form method="post" action="{% url 'create_session' tutor_course_id=tutor.id %}">
+										{% csrf_token %} {{ form.as_p }}
+										<button type="submit" class="btn btn-primary">Request Session</button>
+									</form>
+								</div>
+							</div>
+							{% empty %}
+							<p>No tutors available for this course.</p>
+							{% endfor %}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		{% bootstrap_javascript %}
+		{% bootstrap_messages %}
+	</body>

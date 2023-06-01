@@ -1,0 +1,27 @@
+/* Make the footer stick to the bottom of the screen */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+  
+/* Style the copyright message inside the footer */
+footer span {
+    font-size: 14px;
+    color: white;
+}  
+
+/* Center the navbar */
+nav.navbar {
+    text-align: center;
+}
+  
+  /* Center the navbar-brand text */
+nav.navbar .navbar-brand {
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}

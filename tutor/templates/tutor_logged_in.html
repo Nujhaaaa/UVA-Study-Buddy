@@ -1,0 +1,110 @@
+{% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {%	bootstrap_messages %}
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>UVA Study Buddy</title>
+			<link
+				rel="stylesheet"
+				type="text/css"
+				href="../../static/tutor/style.css" />
+				<style>
+					/* body {
+						background-image: url("/static/background.jpg");
+						background-repeat: repeat-y;
+						background-size: 100%;
+      				}
+					.functionals{
+						padding-top: 1px;
+						margin: auto;
+						width: 1000px;
+						border: 3px solid black;
+
+						background-color: white;
+						border-radius: 5%;
+						margin-top: 120px;
+						padding-bottom: 100px;
+						margin-bottom: 25px;
+					} */
+				</style>
+		</head>
+		<body>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container">
+					<a class="navbar-brand" href="/">UVa Study Buddy</a>
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'tutor_logged_in' id=request.user.id %}">Search</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'tutor_sessions' id=request.user.id %}">Sessions</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'tutor_courses' id=request.user.id %}">Courses</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'tutor_inbox' %}">Messages</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/logout">Logout</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="functionals">
+			<div class="container text-center pt-5">
+				<div class="d-flex mt-5 justify-content-center">
+					<h1 class = "pt-5 mb-4 text-center">Welcome, Tutor!</h1>
+				</div>
+				<div class="mt-4">
+					<form method="get" action="{% url 'tutor_logged_in' id=request.user.id %}" class="d-flex justify-content-center">
+						<input type="text" name="q" class="form-control" placeholder="Type course mnemonic, number"
+							value="{{ request.GET.q }}"
+							style="width: 25%;" />
+						<button type="submit" class="btn btn-primary ms-2" style="width: 150px; height: 38px;">Search</button>
+					</form>
+				</div>
+		</div>
+
+	<!-- Add the search bar
+		<form method="get" action="{% url 'tutor_logged_in' id=request.user.id %}">
+			<input
+				type="text"
+				name="q"
+				class="form-control"
+				placeholder="Search by course mnemonic, number, or name..."
+				value="{{ request.GET.q }}" />
+			<button type="submit" class="btn btn-primary mt-2">Search</button>
+		</form> -->
+
+			{% if query and courses %}
+			<table class="table mt-4">
+				<thead>
+					<tr>
+						<th>Course</th>
+						<th>Name</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for course in courses %}
+					<tr>
+						<td>{{ course.subject }}{{ course.catalog_nbr }}</td>
+						<td>{{ course.descr }}</td>
+						<td>
+							<a
+								href="{% url 'add_course' course_id=course.subject|add:course.catalog_nbr %}"
+								class="btn btn-primary"
+								>Add Course</a
+							>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% endif %}
+		</div>
+		</body>
+	</html>

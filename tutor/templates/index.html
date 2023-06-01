@@ -1,0 +1,190 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UVa Study Buddy</title>
+    <link rel="stylesheet" type="text/css" href="../../static/tutor/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap">
+    <style>
+      /* Additional styles */
+      /* body {
+        background-image: url("/static/background.jpg");
+        background-repeat: repeat-y;
+        background-size: 100%;
+      }
+      .functionals{
+        margin: auto;
+        width: 600px;
+        border: 3px solid black;
+
+        background-color: white;
+        border-radius: 20%;
+        margin-top: 180px;
+      } */
+      /* .background{
+        background-image: url("/static/background.jpg");
+      } */
+      .navbar-brand {
+        font-weight: bold;
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+/* 
+      .jumbotron {
+        padding-top: 180px;
+      } */
+      
+      .jumbotron h1 {
+        color: black;
+        font-weight: bold;
+        font-size: 48px;
+        letter-spacing: 2px;
+      }
+      .jumbotron{
+        padding-bottom: 25px;
+      }
+      .jumbotron p {
+        color: black;
+        font-size: 24px;
+        letter-spacing: 1px;
+      }
+      .d-flex.justify-content-center .btn-secondary {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .btn-primary {
+        background-color: black;
+        border-color: black;
+        border-radius: 50px;
+      }
+
+      /* .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+        transform: scale(.65);
+      } */
+
+      .btn-secondary {
+        /* background-color: black;
+        border-color: black; */
+        border-radius: 150px;
+      }
+      .pb-3{
+        font-size: 20;
+        color: black;
+        padding-bottom: 20px;
+      }
+      .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+      }
+      .btn-outline-primary{
+        background-color: transparent;
+        width: 80px;
+        border-width: 2px;
+        border-color: black;
+        color: black;
+        border-radius: 30%;
+      }
+      .btn-outline-primary:hover{
+        background-color: black;
+        transform: scale(.95);
+      }
+      .course-category {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .vstack{
+        display: inline;
+      } 
+      .course-category-item {
+        flex: 0 0 calc(33.333% - 1rem);
+        /* background-color: #f8f9fa;
+        border: 1px solid #dee2e6; */
+        padding: 1rem;
+        text-align: center;
+        color: black;
+        /* border-radius: 0.25rem; */
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">UVA Study Buddy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Tutors</a>
+            </li>
+          </ul>
+          </div>
+      </div>
+      <div class="animation start-home"></div>
+    </section> -->
+
+   <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+      </nav>
+
+      <!-- Jumbotron -->
+<div class="functionals">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="display -4 pb-2 pt-5">UVA Study Buddy</h1>
+      <p class="lead pb-5">Learn with your peers</p>
+      <h6 class="pb-3">I am a: </h6>
+      <div class = "vstack gap-2 col-md-5 mx-auto pb-5">
+        <a href="/createStudent/" class = "btn btn-outline-primary">Student</a>
+        <a href="/createTutor/" class = "btn btn-outline-primary">Tutor</a>
+      </div>
+    </div>
+    <!-- <div>
+      <h7 class="pb-3">Offering Courses in All the Following!</h7>
+    </div>
+    <div class="course-category">
+      <div class="course-category-item">Mathematics</div>
+      <div class="course-category-item">Physics</div>
+      <div class="course-category-item">Humanities</div>
+      <div class="course-category-item">Computational Sciences</div>
+      <div class="course-category-item">Engineering</div>
+      <div class="course-category-item">Business</div>
+    </div> -->
+  </section>
+</div>
+<!-- Course Categories -->
+<!-- <section class="container my-5">
+  <h2 class="text-center mb-4">We offer the following courses to get tutored in ... Join Now!</h2>
+  <div class="course-category">
+    Replace with dynamic content or add more categories as needed -->
+    <!-- <div class="course-category-item">Mathematics</div>
+    <div class="course-category-item">Physics</div>
+    <div class="course-category-item">Humanities</div>
+    <div class="course-category-item">Computational Sciences</div>
+    <div class="course-category-item">Engineering</div>
+    <div class="course-category-item">Business</div>
+  </div>
+</section> -->
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {%bootstrap_messages %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>UVA Study Buddy</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../../static/tutor/style.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <a class="navbar-brand" href="/">UVa Study Buddy</a>
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'student_logged_in' id=request.user.id %}">Search</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'student_sessions' id=request.user.id %}">Sessions</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'student_inbox' %}">Messages</a>
+                   </li>
+                               <li class="nav-item">
+                                  <a class="nav-link" href="/logout">Logout</a>
+                              </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  	<h1 class="ml-8">Welcome, Student!</h1>
+    {% load crispy_forms_tags %}
+    <div class="container">
+     <div class="row">
+       <div class="card col-md-12 mt-5 p-3 shadow-sm">
+         <h5>{{ thread.receiver }}</h5>
+       </div>
+     </div>
+     {% if message_list.all.count == 0 %}
+     <div class="row my-5">
+       <div class="col-md-12">
+         <p class="empty-text">No Messages</p>
+       </div>
+     </div>
+     {% endif %}
+     {% for message in message_list %}
+     <div class="row">
+       <div class="col-md-12 my-1">
+      {% if message.sender_user == request.user %}
+       <div class="sent-message my-3">
+        <p class="my-0 text-primary">{{ message.sender_user.email }}:</p>
+         <p>{{ message.body }}</p>
+       </div>
+     {% elif message.receiver_user == request.user %}
+     <div class="received-message my-3">
+       <p class="my-0 text-danger">{{ thread.receiver }}:</p>
+       <p>{{ message.body }}</p>
+     </div>
+     {% endif %}
+     </div>
+   </div>
+   {% endfor %}
+   <div class="row">
+     <div class="card col-md-12 p-3 shadow-sm">
+       <form method="POST" action="{% url 'create-message' thread.pk %}" enctype="multipart/form-data">
+         {% csrf_token %}
+         {{ form | crispy }}
+         <div class="d-grid gap-2 mt-3">
+           <button class="btn btn-light" type="submit">Send Message</button>
+         </div>
+       </form>
+     </div>
+   </div>
+ </div>
+</body>
